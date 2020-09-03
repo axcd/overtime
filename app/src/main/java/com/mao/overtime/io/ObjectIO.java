@@ -8,7 +8,7 @@ import com.mao.overtime.*;
 public class ObjectIO <T>
 {
 
-	private File dir = new File(Environment.getExternalStorageDirectory(), "/overtime/");
+	private File root = new File(Environment.getExternalStorageDirectory(), "/overtime/");
 
 	//序列化
 	public void outObject(T t, String fname)
@@ -16,16 +16,42 @@ public class ObjectIO <T>
 
 		try
 		{
-			mkDir(dir, fname.substring(0, 4));
+			mkDir();
+			File dir  = new File(root, fname.split("/")[0]);
 
-			if (null == t)
+			if (fname.contains("/"))
 			{
-				File f = new File(dir + File.separator + fname);
-				f.delete();
+				if (null == t)
+				{
+					File f = new File(root + File.separator + fname);
+					if (f.exists())
+					{
+						f.delete();
+					}
+
+					File d = new File(root, fname.split("/")[0]);
+					if (d.exists() && d.isDirectory() && d.listFiles().length == 0)
+					{
+						d.delete();
+					}
+				}
+				else
+				{
+					if (!dir.exists())
+					{   
+						dir.mkdir();
+					}
+					
+					FileOutputStream fos = new FileOutputStream(root + File.separator + fname);
+					ObjectOutputStream oos = new ObjectOutputStream(fos);
+					oos.writeObject(t);
+					oos.flush();
+					oos.close();
+				}
 			}
 			else
 			{
-				FileOutputStream fos = new FileOutputStream(dir + File.separator + fname);
+				FileOutputStream fos = new FileOutputStream(root + File.separator + fname);
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(t);
 				oos.flush();
@@ -47,7 +73,7 @@ public class ObjectIO <T>
 
 		try
 		{
-			FileInputStream fis = new FileInputStream(dir + File.separator + fname);
+			FileInputStream fis = new FileInputStream(root + File.separator + fname);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			t = (T) ois.readObject();
 		}
@@ -64,20 +90,13 @@ public class ObjectIO <T>
 	}
 
 	//创建文件
-	public void mkDir(File file, String dirname)
+	public void mkDir()
 	{
 		try 
 		{
-			File f = new File(file, dirname);
-
-			if (!file.exists())
+			if (!root.exists())
 			{   
-				file.mkdir();
-			}
-
-			if (!f.exists())
-			{   
-				f.mkdir();
+				root.mkdir();
 			}
 		}
 		catch (Exception e)

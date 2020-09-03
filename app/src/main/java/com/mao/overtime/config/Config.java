@@ -10,7 +10,7 @@ import com.mao.overtime.*;
 
 public class Config
 {
-	private static int startDay = 1;
+	private static int startDay = 24;
 	private static Date today;
 	private static Date selectedDate;
 	private static Date startDate;
