@@ -1,0 +1,24 @@
+# view AndroidManifest.xml #generated:21
+-keep class com.mao.overtime.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:31
+-keep class com.mao.overtime.activity.UpdateActivity { <init>(...); }
+
+# view res/layout/update.xml #generated:152
+-keep class com.mao.overtime.layout.MyRadioGroup { <init>(...); }
+
+# view res/layout/day_view.xml #generated:9
+-keep class com.mao.overtime.view.DayView { <init>(...); }
+
+# onClick res/layout/main.xml #generated:51
+-keepclassmembers class * { *** nextMonth(...); }
+
+# onClick res/layout/update.xml #generated:564
+-keepclassmembers class * { *** onDelete(...); }
+
+# onClick res/layout/update.xml #generated:575
+-keepclassmembers class * { *** onInsert(...); }
+
+# onClick res/layout/main.xml #generated:29
+-keepclassmembers class * { *** preMonth(...); }
+

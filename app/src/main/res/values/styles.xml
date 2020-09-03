@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<style name="MyDialogTheme" parent="@android:style/Theme.Holo.Light.Dialog">	
+		<item name="android:windowBackground">@drawable/my_bg</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowTitleSize">16dip</item>
+		<item name="android:windowNoTitle">false</item>
+		<item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+	</style>
+
+	<style name="MyDialogAnimation" parent="android:Animation">
+		<item name="@android:windowEnterAnimation">@anim/dialog_enter</item>  
+		<item name="@android:windowExitAnimation">@anim/dialog_exit</item>    
+	</style>
+
+	<style name="DialerStyle" parent="android:Theme.Material.Light">
+        <!--应用的主要文字颜色,actionBar的标题文字默认使用该颜色-->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!--辅助的文字颜色，一般比textColorPrimary的颜色弱一点，用于一些弱化的表示-->
+        <item name="android:textColorSecondary">#C1C1C1</item>
+        <!--应用的主要色调,actionBar默认使用该颜色，Toolbar导航栏的底色-->
+        <item name="android:colorPrimary">#333ff9</item>
+        <!--应用的主要暗色调,statusBarColor 默认使用该颜色-->
+        <item name="android:colorPrimaryDark">#f00000</item>
+        <!--状态栏颜色,默认使用 colorPrimaryDark-->
+        <item name="android:statusBarColor">#00FFFF</item>
+        <!--底部栏颜色-->
+        <item name="android:navigationBarColor">#FF1493</item>
+        <!--窗口背景颜色,此处不允许直接赋值如 #FFFFFF，必须在color中定义使用-->
+        <item name="android:windowBackground">@android:color/white</item>
+        <!--控件选中时的颜色,默认使用colorAccent-->
+        <item name="android:colorControlActivated">#FF7F50</item>
+        <!--控件按压时的色调-->
+        <item name="android:colorControlHighlight">#FF00FF</item>
+        <!--CheckBox,RadioButton,SwitchCompat等默认状态的颜色-->
+        <item name="android:colorControlNormal">#FFD700</item>
+        <!--默认按钮的背景颜色-->
+        <item name="android:colorButtonNormal">#1C71A9</item>
+        <!--一般控件的选中效果默认采用该颜色,如 CheckBox,RadioButton,SwitchCompat等-->
+        <item name="android:colorAccent">#009999</item>
+        <!--默认 EditView 输入框字体的颜色-->
+        <item name="android:editTextColor">#0000ff</item>
+        <!--默认 Button,TextView的文字颜色-->
+        <item name="android:textColor">#B0C4DE</item>
+        <!--RadioButton checkbox等控件的文字-->
+        <item name="android:textColorPrimaryDisableOnly">#1C71A9</item>
+    </style>
+
+</resources>

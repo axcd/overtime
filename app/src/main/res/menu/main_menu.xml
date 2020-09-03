@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+		android:showAsAction="always"
+        android:id="@+id/count"
+        android:title="统计"/>
+
+	<item
+		android:showAsAction="always"
+        android:id="@+id/set"
+        android:title="设置"/>
+
+</menu>
