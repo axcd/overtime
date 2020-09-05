@@ -99,35 +99,35 @@ public class MainActivity extends Activity
         ListAdapter adapter = new DayAdapter(this, dates);
 		gv.setAdapter(adapter);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// TODO: Implement this method
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_menu, menu);
-
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item)
-	{
-		Intent intent = new Intent();
-		// TODO: Implement this method
-		switch (item.getItemId())
-		{
-
-			case R.id.count:
-
-				return true;
-
-			case R.id.set:
-
-				return true;
-		}
-		return super.onMenuItemSelected(featureId, item);
-	}
+	
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu)
+//	{
+//		// TODO: Implement this method
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.menu.main_menu, menu);
+//
+//		return super.onCreateOptionsMenu(menu);
+//	}
+//
+//	@Override
+//	public boolean onMenuItemSelected(int featureId, MenuItem item)
+//	{
+//		Intent intent = new Intent();
+//		// TODO: Implement this method
+//		switch (item.getItemId())
+//		{
+//
+//			case R.id.count:
+//
+//				return true;
+//
+//			case R.id.set:
+//
+//				return true;
+//		}
+//		return super.onMenuItemSelected(featureId, item);
+//	}
 	
 }
 
@@ -139,7 +139,7 @@ class DayAdapter extends ArrayAdapter<Date>
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
+	public View getView(final int position, View convertView, ViewGroup parent)
 	{
 		LayoutInflater inflater = LayoutInflater.from(getContext());
 		View view = inflater.inflate(R.layout.day_view, parent, false);
@@ -157,7 +157,7 @@ class DayAdapter extends ArrayAdapter<Date>
 		if (date.after(Config.getStartDate()) && date.before(Config.getEndDate()))
 		{
 			textView.setBackgroundColor(Color.parseColor("#FFFDDFEE"));
-
+			
 			//是否绘制
 			textView.setDraw(true);
 
@@ -223,6 +223,16 @@ class DayAdapter extends ArrayAdapter<Date>
 						Config.setSelectedDate(date);
 						Config.setSelectedView(textView);
 						textView.setSelected(true);
+						
+
+						//设置周末
+						if(position%7==0 || position%7==6)
+						{
+							Config.setWeekend(true);
+						}else
+						{
+							Config.setWeekend(false);
+						}
 						
 						//这儿写长按逻辑
 						Intent intent = new Intent();

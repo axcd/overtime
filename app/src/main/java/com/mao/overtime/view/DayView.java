@@ -195,12 +195,13 @@ public class DayView extends TextView
 					}
 
 					//如果是休班，绘制背景颜色
-					if (null != day.getShift() && day.getShift().equals(Shift.REST))
+					if (Shift.REST.equals(day.getShift()))
 					{
 						hour = "";
 						hour_bkgcolor = Color.parseColor("#21111111");	
 					}
 					
+					//如果为零不显示小时
 					if(day.getHour().equals(Hour.ZERO))
 					{
 						hour = "";

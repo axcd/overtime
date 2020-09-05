@@ -12,6 +12,7 @@ import com.mao.overtime.io.*;
 import com.mao.overtime.enum.*;
 import android.widget.*;
 import android.widget.CompoundButton.*;
+import android.icu.util.*;
 
 public class UpdateActivity extends Activity
 {
@@ -19,11 +20,14 @@ public class UpdateActivity extends Activity
 	private Rate rate = Rate.ONE_AND_HALF;
 	private Fake fake = Fake.NORMAL;
 	private Hour hour = Hour.THREE;
+
 	private ObjectIO<Month> io = new ObjectIO<Month>();
+
 	private int d;
 	private String m;
 	private Month month;
 	private String date;
+	private int y =80;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +36,7 @@ public class UpdateActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.update);
 
+		//从下面插入效果
 		Display display = getWindowManager().getDefaultDisplay(); 
 		Window window = getWindow();	
 		LayoutParams windowLayoutParams = window.getAttributes(); 
@@ -53,17 +58,68 @@ public class UpdateActivity extends Activity
 		{
 			month = Config.getNextMonth();
 		}
-		
+
 		RadioGroup shiftRadioGroup = (RadioGroup)findViewById(R.id.shiftRadioGroup);
 		RadioGroup rateRadioGroup = (RadioGroup)findViewById(R.id.rateRadioGroup);
 		RadioGroup fakeRadioGroup = (RadioGroup)findViewById(R.id.fakeRadioGroup);
 		RadioGroup hourRadioGroup = (RadioGroup)findViewById(R.id.hourRadioGroup);
+		
+		final ScrollView hourScrollView = (ScrollView)findViewById(R.id.hourScrollView);
+		hourScrollView.post(new Runnable(){
+				public void run()
+				{
+					hourScrollView.scrollTo(0, getY());
+				}
+			});
+			
+		//增加监听
+		shiftRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup p1, int p2)
+				{
+					RadioButton rb = (RadioButton) findViewById(p2);
+					String str = rb.getText().toString();
+					shift = Shift.get(str);
+				}
+			});
+
+		rateRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup p1, int p2)
+				{
+					RadioButton rb = (RadioButton) findViewById(p2);
+					String str = rb.getText().toString();
+					rate = Rate.get(str);
+				}
+			});
+
+		fakeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup p1, int p2)
+				{
+					RadioButton rb = (RadioButton) findViewById(p2);
+					String str = rb.getText().toString();
+					fake = Fake.get(str);
+				}
+			});
+
+		hourRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+				public void onCheckedChanged(RadioGroup p1, int p2)
+				{
+					RadioButton rb = (RadioButton) findViewById(p2);
+					String str = rb.getText().toString();
+					hour = Hour.get(str);
+				}
+			});
 
 		((RadioButton)shiftRadioGroup.getChildAt(0)).setChecked(true);
 		((RadioButton)rateRadioGroup.getChildAt(0)).setChecked(true);
 		((RadioButton)fakeRadioGroup.getChildAt(0)).setChecked(true);
 		((RadioButton)hourRadioGroup.getChildAt(6)).setChecked(true);
 
+		//周末设置双倍倍数
+		if (Config.isWeekend())
+		{
+			((RadioButton)rateRadioGroup.getChildAt(1)).setChecked(true);
+			((RadioButton)hourRadioGroup.getChildAt(22)).setChecked(true);
+		}
 		//回显加班信息
 		if (null != month.getDay(d))
 		{
@@ -107,48 +163,28 @@ public class UpdateActivity extends Activity
 				if (rb.getText().toString().equals(month.getDay(d).getHour().getHourName()))
 				{
 					rb.setChecked(true);
+					setY((i/6)*60);
 					break;
 				}
 			}
 		}
-
-		//增加监听
-		shiftRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-				public void onCheckedChanged(RadioGroup p1, int p2)
+		
+		hourScrollView.post(new Runnable(){
+				public void run()
 				{
-					RadioButton rb = (RadioButton) findViewById(p2);
-					String str = rb.getText().toString();
-					shift = Shift.get(str);
+					hourScrollView.scrollTo(0, getY());
 				}
 			});
+	}
 
-		rateRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-				public void onCheckedChanged(RadioGroup p1, int p2)
-				{
-					RadioButton rb = (RadioButton) findViewById(p2);
-					String str = rb.getText().toString();
-					rate = Rate.get(str);
-				}
-			});
+	public void setY(int y)
+	{
+		this.y = y;
+	}
 
-		fakeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-				public void onCheckedChanged(RadioGroup p1, int p2)
-				{
-					RadioButton rb = (RadioButton) findViewById(p2);
-					String str = rb.getText().toString();
-					fake = Fake.get(str);
-				}
-			});
-
-		hourRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-				public void onCheckedChanged(RadioGroup p1, int p2)
-				{
-					RadioButton rb = (RadioButton) findViewById(p2);
-					String str = rb.getText().toString();
-					hour = Hour.get(str);
-				}
-			});
-
+	public int getY()
+	{
+		return y;
 	}
 
 	public void onDelete(View view)

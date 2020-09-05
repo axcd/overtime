@@ -24,18 +24,19 @@ public class MyRadioGroup extends RadioGroup
 		//获取最大宽度
 		int maxWidth = MeasureSpec.getSize(widthMeasureSpec);
 		int childCount = getChildCount();
-		int n = 6, h = 70, m = 15;
+		int n = 6, h = 75, m = 10;
 		int row = (int)Math.ceil(childCount/n)+1;
 		int maxHeight = row*h+m;
+		h -= m;
 		
-//		int w = (maxWidth-(n+1)*m)/n;
-//		for(int i=0;i<childCount;i++)
-//		{
-//			final View child = getChildAt(i);
-//			int wm = MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY);
-//			int hm = MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY);
-//			child.measure(w,h);
-//		}
+		int w = (maxWidth-m)/n-m;
+		for(int i=0;i<childCount;i++)
+		{
+			final View child = getChildAt(i);
+			int wm = MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY);
+			int hm = MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY);
+			child.measure(wm,hm);
+		}
 		
 		// 设置容器所需的宽度和高度
 		setMeasuredDimension(maxWidth, maxHeight);
@@ -49,7 +50,7 @@ public class MyRadioGroup extends RadioGroup
 		final int childCount = getChildCount();
 		int maxWidth = r - l;
 		int row = 0;
-		int h = 70, n = 6, m = 15 ;
+		int h = 75, n = 6, m = 10 ;
 		for (int i = 0; i < childCount; i++)
 		{
 			final View child = this.getChildAt(i);

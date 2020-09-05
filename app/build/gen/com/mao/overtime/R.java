@@ -613,11 +613,12 @@ containing a value of this type.
         public static final int async=0x7f0a0006;
         public static final int blocking=0x7f0a0007;
         public static final int chronometer=0x7f0a001a;
-        public static final int count=0x7f0a0022;
+        public static final int count=0x7f0a0024;
         public static final int entryTextView1=0x7f0a000b;
-        public static final int fakeRadioGroup=0x7f0a0020;
+        public static final int fakeRadioGroup=0x7f0a0021;
         public static final int forever=0x7f0a0008;
-        public static final int hourRadioGroup=0x7f0a0021;
+        public static final int hourRadioGroup=0x7f0a0023;
+        public static final int hourScrollView=0x7f0a0022;
         public static final int icon=0x7f0a0013;
         public static final int icon_group=0x7f0a001d;
         public static final int info=0x7f0a0016;
@@ -630,16 +631,17 @@ containing a value of this type.
         public static final int notification_background=0x7f0a0018;
         public static final int notification_main_column=0x7f0a0014;
         public static final int notification_main_column_container=0x7f0a0012;
-        public static final int rateRadioGroup=0x7f0a001f;
+        public static final int rateRadioGroup=0x7f0a0020;
         public static final int right_icon=0x7f0a0017;
         public static final int right_side=0x7f0a0015;
-        public static final int set=0x7f0a0023;
-        public static final int shiftRadioGroup=0x7f0a001e;
+        public static final int set=0x7f0a0025;
+        public static final int shiftRadioGroup=0x7f0a001f;
         public static final int tag_transition_group=0x7f0a0002;
         public static final int text=0x7f0a0003;
         public static final int text2=0x7f0a0004;
         public static final int time=0x7f0a0019;
         public static final int title=0x7f0a0005;
+        public static final int txt_topbar=0x7f0a001e;
         public static final int yyyyMM=0x7f0a000d;
     }
     public static final class integer {

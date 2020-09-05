@@ -16,14 +16,14 @@ public class ObjectIO <T>
 
 		try
 		{
-			mkDir();
+			mkRootDir();
 			File dir  = new File(root, fname.split("/")[0]);
 
 			if (fname.contains("/"))
 			{
 				if (null == t)
 				{
-					File f = new File(root + File.separator + fname);
+					File f = new File(root, File.separator + fname);
 					if (f.exists())
 					{
 						f.delete();
@@ -41,21 +41,12 @@ public class ObjectIO <T>
 					{   
 						dir.mkdir();
 					}
-					
-					FileOutputStream fos = new FileOutputStream(root + File.separator + fname);
-					ObjectOutputStream oos = new ObjectOutputStream(fos);
-					oos.writeObject(t);
-					oos.flush();
-					oos.close();
+					out(t,fname);
 				}
 			}
 			else
 			{
-				FileOutputStream fos = new FileOutputStream(root + File.separator + fname);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(t);
-				oos.flush();
-				oos.close();
+				out(t,fname);
 			}
 		}
 		catch (Exception e)
@@ -90,7 +81,7 @@ public class ObjectIO <T>
 	}
 
 	//创建文件
-	public void mkDir()
+	public void mkRootDir()
 	{
 		try 
 		{
@@ -101,5 +92,30 @@ public class ObjectIO <T>
 		}
 		catch (Exception e)
 		{}
+	}
+	
+	//写入文件
+	public void out(T t, String fname)
+	
+	{
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		try
+		{
+			fos = new FileOutputStream(root + File.separator + fname);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(t);
+		}
+		catch (IOException e)
+		{}
+		finally{
+			try
+			{
+				oos.flush();
+				oos.close();
+			}
+			catch (IOException e)
+			{}
+		}
 	}
 }

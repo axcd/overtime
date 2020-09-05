@@ -18,7 +18,8 @@ public class Config
 	private static Month preMonth;
 	private static Month nextMonth;
 	private static DayView selectedView;
-	
+	private static boolean weekend;
+
 	//测试数据
 	public static Month getMonth()
 	{
@@ -160,6 +161,16 @@ public class Config
 	public static Month getNextMonth()
 	{
 		return nextMonth;
+	}
+
+	public static void setWeekend(boolean weekend)
+	{
+		Config.weekend = weekend;
+	}
+
+	public static boolean isWeekend()
+	{
+		return weekend;
 	}
 	
 }
