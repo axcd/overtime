@@ -27,7 +27,7 @@ public class UpdateActivity extends Activity
 	private String m;
 	private Month month;
 	private String date;
-	private int y =80;
+	private int y =90;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

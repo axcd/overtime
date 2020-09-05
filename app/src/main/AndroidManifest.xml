@@ -29,8 +29,7 @@
 		
 		<activity
 			android:name=".activity.UpdateActivity"
-			android:theme="@style/MyDialogTheme"
-			android:label=" ">
+			android:theme="@style/MyDialogTheme">
 		</activity>
 		
 	</application>
